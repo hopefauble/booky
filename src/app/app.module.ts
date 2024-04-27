@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BookService } from './booksearch/services/book/book.service';
 import { BooksearchModule } from './booksearch/booksearch.module';
-import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -18,7 +17,6 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     ReactiveFormsModule,
     BooksearchModule,
-    LoginComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [BookService],
