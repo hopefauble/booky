@@ -1,21 +1,19 @@
-<p>book-search works!</p>
+<p>Search for any book by title or author: </p>
+
 <form [formGroup]="SearchForm" (ngSubmit)="onSubmit()">
     <div>
-        <input formControlName="query" type="text" [(ngModel)]="searchQuery" placeholder="Enter your search query">
-    </div>
-    <button type="submit" (click)="onSubmit()">Submit</button>
-
+        <input formControlName="query" type="text" [(ngModel)]="searchQuery" placeholder="Enter your search query.">
+    
+    <button type="submit" (click)="onSubmit()">Search</button>
+</div>  
 </form>
-<div *ngFor="let book of books">
-    <h2>Title: {{ book.title }}</h2>
-    <p>Authors: {{ book.authors }}</p>
-    <p>Description: {{ book.description }}</p>
-</div>
-<div class="search-results">
-    <ul>
-        <li *ngFor="let book of searchResults">
-            {{ book.name }}
-        </li>
-    </ul>
-    <p *ngIf="searchResults.length === 0">No results found.</p>
-</div>
+
+<book [Book]="book" *ngFor="let book of books"/>
+    <div class="search-results">
+        <ul>
+            <li *ngFor="let book of searchResults">
+                {{ book.name }}
+            </li>
+        </ul>
+        <p class=if *ngIf="searchResults.length == 0"> No results found. </p>
+    </div>
