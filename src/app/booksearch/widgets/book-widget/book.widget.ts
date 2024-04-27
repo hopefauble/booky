@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { BookService } from '../../../book.service';
-import { Book } from '../../../book.model';
+import { BookService } from '../../services/book/book.service';
+import { Book } from '../../../models/book.model';
 @Component({
   selector: 'book',
   templateUrl: './book.widget.html',

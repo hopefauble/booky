@@ -4,8 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BookService } from './book.service';
+import { BookService } from './booksearch/services/book/book.service';
 import { BooksearchModule } from './booksearch/booksearch.module';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { BooksearchModule } from './booksearch/booksearch.module';
     FormsModule,
     ReactiveFormsModule,
     BooksearchModule,
+    LoginComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   providers: [BookService],
