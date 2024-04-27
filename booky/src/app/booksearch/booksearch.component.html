@@ -1,46 +1,21 @@
-<html>
-<head>
+<p>book-search works!</p>
+<form [formGroup]="SearchForm" (ngSubmit)="onSubmit()">
+    <div>
+        <input formControlName="query" type="text" [(ngModel)]="searchQuery" placeholder="Enter your search query">
+    </div>
+    <button type="submit" (click)="onSubmit()">Submit</button>
 
-<style>
-    /* Add styles to format the search bar */
-.search-container {
-    display: flex;
-    align-items: right;
-    justify-content: center;
-  }
-  
-  #search-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  
-</style>
-</head>
-<body>
-    <p>book-search works!</p>
-    <form [formGroup]="SearchForm" (ngSubmit)="onSubmit()">
-        <div>
-          <input formControlName= "query" type="text" [(ngModel)]="searchQuery" placeholder="Enter your search query">
-        </div>
-        <button type="submit" (click)="onSubmit()">Submit</button>
-
-      </form>
-  <!-- <p *ngIf="book">Search Query: {{book}}</p> -->
-  <div *ngFor="let book of books">
+</form>
+<div *ngFor="let book of books">
     <h2>Title: {{ book.title }}</h2>
     <p>Authors: {{ book.authors }}</p>
     <p>Description: {{ book.description }}</p>
-  </div>
-  <div class="search-results">
+</div>
+<div class="search-results">
     <ul>
-      <li *ngFor="let book of searchResults">
-        {{ book.name }}
-      </li>
+        <li *ngFor="let book of searchResults">
+            {{ book.name }}
+        </li>
     </ul>
     <p *ngIf="searchResults.length === 0">No results found.</p>
-  </div>
-</body>
-  </html>
+</div>
