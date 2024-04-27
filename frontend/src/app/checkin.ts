@@ -1,4 +1,4 @@
-import { User } from './book';
+import { User } from './book.model';
 
 
 export interface CheckIn{

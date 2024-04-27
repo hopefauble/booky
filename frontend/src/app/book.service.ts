@@ -35,6 +35,10 @@ export class BookService {
       return [];
     }
   }
+  deleteBookByTitle(bookId: string): Observable<any> {
+    const url = '/url/books/$(bookId)'; //double check and see if the path is correct
+    return this.http.delete(url);
+  }
 }
 //   searchBooks(query: string): Observable<any[]> {
 //     return this.http.get<any[]>(`/api/books?query=${query}`);
@@ -43,6 +47,6 @@ export class BookService {
 export interface Book {
   title: string
   authors: string 
-  description: string 
+  description: string  
   // isbn: number
 }

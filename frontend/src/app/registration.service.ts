@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { User } from './book';
+import { User } from './book.model';
 
 /**
  * Handle the registration concerns of the system including the ability
