@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
   standalone: true,
   imports: [BooksearchModule, AuthModule, RouterOutlet, RouterLink],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'Booky';

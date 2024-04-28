@@ -15,9 +15,9 @@ export class AuthService {
     return this.http.post<User>('api/user', user);
   }
 
-  loginUser(user: User) {
-    return this.http.get<User>('/api/user', user);
-  }
+  // loginUser(user: User) {
+  //   return this.http.get<User>('/api/user', user);
+  // }
 
   getUserById(user_id: number) {
     return this.http.get<User>(`/api/user/${user_id}`);

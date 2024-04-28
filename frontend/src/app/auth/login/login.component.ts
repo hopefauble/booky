@@ -6,7 +6,7 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   errorMessage: string ='';
@@ -32,10 +32,10 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    const { username, password } = this.LoginForm.value;
-    this.authService.loginUser({ username, password }).subscribe(_ => {
-      this.router.navigate(['/login']);
-    });
+    // const { username, password } = this.LoginForm.value;
+    // this.authService.loginUser({ username, password }).subscribe(_ => {
+    //   this.router.navigate(['/login']);
+    // });
   }
 
 }
