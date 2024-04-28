@@ -1,43 +1,63 @@
-"""Stand-in data layer until we connect to the database.
+from fastapi import Depends
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
-This file provides some overly simplistic access functions to support the minimum
-API of this exercise. Ultimately, functions like these will be backed by an actual
-storage system such as a relational database.
-"""
-from datetime import datetime
-from models.user import User
-
-_users: dict[int, User] = {}
-"""Private module data simulating a simple key-value store where keys are PID and values are User objects. Do not reference externally."""
-
-
+from ..database import db_session
+from ..models import User
+from .user import UserEntity
 
 class UserService:
-    def reset(self):
-        global _users
-        _users = {}
 
-    def create_user(self, user: User) -> User:
+    def __init__(
+        self,
+        session: Session = Depends(db_session),
+    ):
+        """Initializes the `EventService` session"""
+        self._session = session
 
-        global _users
+    def all(self) -> list[User]:
 
-        if len(user.username) == 0 or len(user.password) == 0:
-            raise Exception(f"Username and password required.")
+        query = select(UserEntity)
+        entites = self._session.scalars(query).all()
 
-        if user.username in _users:
-            raise Exception(f"User with username {user.pid} already registered.")
-        
-        _users[user.id] = user
-
-        return user
-
-    def get_users(self) -> list[User]:
-
-        global _users
-        return list(_users.values())
-
-    def get_user_by_id(self, id: int) -> User | None:
-        global _users
-        return _users[id] if id in _users else None
+        return [entity.toModel() for entity in entites]
     
+    def create(self, user: User):
+
+        userEntity = UserEntity.fromModel(user)
+
+        self._session.add(userEntity)
+        self._session.commit()
+
+        return userEntity.toModel()
+    
+    def getByID(self, id: int):
+
+        user = (
+            self._session.query(UserEntity)
+            .filter(UserEntity.id == id)
+            .one_or_none()
+        )
+
+        # Check if result is null
+        if user is None:
+            raise ResourceNotFoundException(
+                f"No user found with matching id: {id}"
+            )
+
+        return user.to_model()
+    
+    def getIDbyLogin(self, username: str, password: str):
+
+        user = (
+            self._session.query(UserEntity)
+            .filter(UserEntity.username == username)
+            .filter(UserEntity.password == password)
+            .one_or_none()
+        )
+
+        if user is None:
+            raise ResourceNotFoundException(
+                f"No user found with matching username: {username}"
+            )
 

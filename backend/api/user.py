@@ -4,7 +4,7 @@ user routes are used to create, retrieve, and update Pomodoro timers."""
 
 from fastapi import APIRouter, Depends
 
-from backend.models.user import User
+from models.user_model import User
 from backend.services import UserService
 
 __authors__ = ["Ajay Gandecha"]
@@ -24,7 +24,7 @@ def get_timers(
 ) -> list[User]:
 
     # Return all pomodoro timers
-    return user_service.get_timers()
+    return user_service.get_users()
 
 @api.get("/{id}", response_model=User, tags=["user"])
 def get_timer(
@@ -51,17 +51,6 @@ def update_timer(
     user: User,
     user_service: UserService = Depends(),
 ) -> User:
-    """
-    Update pomodoro timer.
-
-    Parameters:
-        timer: a valid User model
-        user_service: a valid userService
-
-    Returns:
-        User: Updated pomodoro timer
-    """
-
     return user_service.update_user(user)
 
 
@@ -73,12 +62,4 @@ def delete_timer(
     id: int,
     user_service: userService = Depends(),
 ) -> User:
-    """
-    Delete pomodoro timer.
-
-    Parameters:
-        id: ID of the timer to delete
-        user_service: a valid userService
-    """
-
     return user_service.delete_user(id)

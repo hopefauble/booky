@@ -1,7 +1,7 @@
 """Tests for the mock storage layer."""
 
 from services.storage import StorageService
-from models.user import User
+from models.user_model import User
 import pytest
 
 
