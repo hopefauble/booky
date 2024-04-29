@@ -31,10 +31,9 @@ export class BooksearchComponent {
       this.bookService.getVolume(this.searchQuery).subscribe(
         (response) => {
           this.books = response; 
-          console.log('Book retrieval success: ', response);
+          console.log('Book retrieval success.');
         },
         (error) => {
-          console.error(error);
           console.log("Book retrieveal failure: ", error);
         }
       );
