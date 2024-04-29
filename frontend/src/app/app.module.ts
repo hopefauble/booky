@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BookService } from './booksearch/services/book/book.service';
 import { BooksearchModule } from './booksearch/booksearch.module';
-import { AuthModule } from './auth/auth.module';
-import { AuthService } from './auth/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -20,11 +18,10 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     BooksearchModule,
-    AuthModule,
     AppRoutingModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [BookService, AuthService],
+  providers: [BookService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
