@@ -6,7 +6,7 @@ import { CompletedbooksComponent } from './completedbooks/completedbooks.compone
 
 export const routes: Routes = [
   { path: '', component: BooksearchComponent},
-  // { path: 'list'},
+  { path: 'list', component: BooklistComponent},
   { path: 'completed', component: CompletedbooksComponent},
 ];
 
