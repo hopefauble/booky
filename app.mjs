@@ -111,7 +111,7 @@ app.delete('/completed/:isbn', async (req, res) => {
     res.json(true);
 })
 
-await Book.create({isbn: "9780345445605", title: "The Hobbit", authors: "J.R.R. Tolkien", description: "A story of a little man going on a big journey."})
+// await Book.create({isbn: "9780345445605", title: "The Hobbit", authors: "J.R.R. Tolkien", description: "A story of a little man going on a big journey."})
 
 app.listen(port, () => {
     console.log('Running on ' + port + '...');
