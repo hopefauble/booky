@@ -5,7 +5,6 @@ import { Book } from './Book.mjs';
 import { Completed } from './Completed.mjs';
 
 const app = express();
-
 const port = 3000;
 
 app.use(cors());
@@ -14,11 +13,11 @@ app.use(bodyParser.json());
 
 // return a list is isbns 
 app.get('/books', async (req, res) => {
-    res.json(await Book.getAllISBNs());
+    res.json(await Book.getAllIDs());
 });
 
-app.get('/books/:isbn', async (req, res) => {
-    let ing = await Book.findByisbn({ isbn: req.params.isbn });
+app.get('/books/:id', async (req, res) => {
+    let ing = await Book.findByID(req.params.id);
     if (!ing) {
         res.status(404).send("Book not found");
         return;
@@ -26,9 +25,8 @@ app.get('/books/:isbn', async (req, res) => {
     res.json(ing.json());
 });
 
-app.post('/books/:isbn', async (req, res) => {
-
-    let ing = await Book.create({ isbn: req.params.isbn });
+app.post('/books/', async (req, res) => {
+    let ing = await Book.create(req.body);
 
     if (!ing) {
         res.status(400).send("Bad request");
@@ -38,23 +36,24 @@ app.post('/books/:isbn', async (req, res) => {
     res.status(201).json(ing.json());
 })
 
-app.put('/books/:isbn', async (req, res) => {
-    let ing = await Book.findByisbn(req.params.isbn);
+
+app.put('/books/:id', async (req, res) => {
+    let ing = await Book.findByID(req.params.id);
     if (!ing) {
         res.status(404).send("Book not found.");
         return;
     }
 
-    if ((!req.body instanceof Object) || (req.body.isbn == undefined)) {
+    if ((!req.body instanceof Object) || (req.body.id == undefined)) {
         res.status(400).send("Bad request");
         return;
     }
 
-    await ing.setISBN(req.body.isbn);
+    await ing.setID(req.body.isbn);
     res.json(true);
 })
 
-app.delete('/books/:isbn', async (req, res) => {
+app.delete('/books/:id', async (req, res) => {
     if (!await Completed.deleteBookByisbn(req.params.isbn)) {
         res.status(400).send("Book not deleted");
         return;
@@ -66,8 +65,8 @@ app.get('/completed', async (req, res) => {
     res.json(await Completed.getAllISBNs());
 });
 
-app.get('/completed/:isbn', async (req, res) => {
-    let ing = await Completed.findByisbn({ isbn: req.params.isbn });
+app.get('/completed/:id', async (req, res) => {
+    let ing = await Completed.findByisbn({ id: req.params.id });
     if (!ing) {
         res.status(404).send("Book not found");
         return;
@@ -77,8 +76,8 @@ app.get('/completed/:isbn', async (req, res) => {
 
 app.post('/completed/:isbn', async (req, res) => {
 
-    let ing = await Completed.create({ isbn: req.params.isbn });
-    let deletion = await Book.deleteBookByID({ isbn: req.params.isbn });
+    let ing = await Completed.create({ id: req.params.id });
+    let deletion = await Book.deleteBookByID({ id: req.params.id });
 
     if (!ing || !deletion) {
         res.status(400).send("Bad request");
@@ -112,7 +111,7 @@ app.delete('/completed/:isbn', async (req, res) => {
     res.json(true);
 })
 
-// await Book.create({isbn: 9780345445605})
+await Book.create({isbn: "9780345445605", title: "The Hobbit", authors: "J.R.R. Tolkien", description: "A story of a little man going on a big journey."})
 
 app.listen(port, () => {
     console.log('Running on ' + port + '...');

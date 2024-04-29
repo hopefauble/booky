@@ -31,11 +31,11 @@ export class BooksearchComponent {
       this.bookService.getVolume(this.searchQuery).subscribe(
         (response) => {
           this.books = response; 
-          console.log('hi');
+          console.log('Book retrieval success: ', response);
         },
         (error) => {
           console.error(error);
-          console.log("sad");
+          console.log("Book retrieveal failure: ", error);
         }
       );
     } else {
