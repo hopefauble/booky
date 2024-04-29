@@ -6,11 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookService } from './booksearch/services/book/book.service';
 import { BooksearchModule } from './booksearch/booksearch.module';
 import { AppRoutingModule } from './app-routing.module';
+import { CompletedbooksComponent } from './completedbooks/completedbooks.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    CompletedbooksComponent,
   ],
   imports: [
     BrowserModule,
