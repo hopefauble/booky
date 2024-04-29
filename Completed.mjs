@@ -1,5 +1,5 @@
 import {db} from './db.mjs';
-export class Book {
+export class Completed {
 
     #id
     #isbn
