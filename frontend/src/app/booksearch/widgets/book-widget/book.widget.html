@@ -1,5 +1,14 @@
-<h2>Title: {{ Book.title }}</h2>
-    <p>Authors: {{ Book.authors }}</p>
-    <p>Description: {{ Book.description }}</p>
-
-<button (click)="onClick()">Save book</button>
+<div class="container">
+    <h2>Title: {{ Book.title }}</h2>
+    <div class="content">
+        <div class="left-column">
+            <p><b>Author(s):</b> {{ Book.authors }}</p>
+            <p><b>ISBN:</b> {{Book.isbn}} </p>
+            <p>{{ Book.description }}</p>
+        </div>
+        <div class="right-column">
+            <button class="button" (click)="onClick()">Save To Reading List</button>
+            <button class="button">I've finished reading this!</button>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import {db} from './db.mjs';
-export class Book {
+export class Completed {
 
     #id
     #isbn
@@ -15,6 +15,7 @@ export class Book {
             try {
                 let db_result = await db.run('insert into Books values (NULL, ?)', data.isbn);
                 let ing = new Book(db_result.lastID, data.isbn);
+                console.log("HERE");
                 return ing;
             } catch (e) {
                 return null;
