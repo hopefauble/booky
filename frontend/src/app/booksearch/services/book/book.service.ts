@@ -7,7 +7,7 @@ import { Book } from '../../../models/book.model';
   providedIn: 'root'
 })
 export class BookService {
-
+  private baseUrl = 'http://localhost:3000/books'; 
   constructor(private http: HttpClient) { }
 
   getVolume(volumeId: string): Observable<Book[]> {
@@ -37,5 +37,17 @@ export class BookService {
       return [];
     }
   }
+    getBooksByUser(userId: string): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.baseUrl}/user/${userId}`);
+  }
+
+    deleteBook(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+    addBookToUser(isbn: number, userId: string): Observable<Book> {
+    return this.http.post<Book>(`${this.baseUrl}`, { isbn, userId });
+  }
+  
 }
 
