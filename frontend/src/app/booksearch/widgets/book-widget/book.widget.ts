@@ -19,19 +19,18 @@ export class BookWidget {
   ) { }
 
   onClick() {
-    const url = `http://localhost:3000/books/${this.Book.isbn}`
-    const headers = new HttpHeaders();
-
-    console.log(this.Book.isbn);
-
-    this.http.post<Book[]>(url, { headers }).subscribe(
+    const url = `http://localhost:3000/books/`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // Set content type to JSON
+    
+    this.http.post<Book[]>(url, this.Book, { headers }).subscribe(
       (response) => {
-        console.log('Success:', response);
+        console.log('Success: ', response);
       },
       (error) => {
-        console.error('Error:', error);
+        console.error('Error: ', error);
       }
     );
+    
   }
 
 }
