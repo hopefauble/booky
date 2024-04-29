@@ -3,18 +3,24 @@ export class Book {
 
     #id
     #isbn
+    #title
+    #authors
+    #description
 
-    constructor (id, isbn) {
+    constructor (id, isbn, title, authors, description) {
         this.#id = id;
         this.#isbn = isbn;
+        this.#title = title;
+        this.#authors = authors;
+        this.#description =  description;
     }
 
     static async create(data) {
         // if ((data !== undefined) && (data instanceof Object) 
         // ) {
             try {
-                let db_result = await db.run('insert into Books values (NULL, ?)', data.isbn);
-                let ing = new Book(db_result.lastID, data.isbn);
+                let db_result = await db.run('insert into Books values (NULL, ?, ?, ?, ?)', data.isbn, data.title, data.authors, data.description);
+                let ing = new Book(db_result.lastID, data.isbn, data.title, data.authors, data.description);
                 return ing;
             } catch (e) {
                 return null;
@@ -25,7 +31,7 @@ export class Book {
 
     static async getAllIDs() {
         try {
-            let rows = await db.all('select id from Books');
+            let rows = await db.all('select id from books');
             return rows.map(r => r.id);
         } catch (e) {
             return [];
@@ -34,7 +40,7 @@ export class Book {
 
     static async getAllISBNs() {
         try {
-            let rows = await db.all('select isbn from Books');
+            let rows = await db.all('select isbn from books');
             return rows.map(r => r.isbn);
         } catch (e) {
             return [];
@@ -43,16 +49,19 @@ export class Book {
 
     static async findByID(id) {
         try {
-            let row = await db.get('select * from Books where id = ?', id);
+            let row = await db.get('select * from books where id = ?', id);
             if (!row) {
                 return null;
             } else {
-                return new Book(row.id, row.isbn);
+                return new Book(row.id, row.isbn, row.title, row.authors, row.description);
             }
         } catch (e) {
+            console.error("Error fetching book by ID:", e);
             return null;
         }
     }
+        
+    
 
     static async deleteBookByID(id) {
         try {
@@ -66,7 +75,10 @@ export class Book {
     json() {
         return {
             id: this.#id,
-            isbn: this.#isbn
+            isbn: this.#isbn,
+            title: this.#title,
+            authors: this.#authors,
+            description: this.#description
         }
     }
 

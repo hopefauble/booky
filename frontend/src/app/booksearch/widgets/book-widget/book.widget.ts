@@ -19,21 +19,18 @@ export class BookWidget {
   ) { }
 
   onClick() {
-    let newISBN = this.extractNumericISBN(this.Book.isbn)
-    const url = `http://localhost:3000/books/${newISBN}`
-    const headers = new HttpHeaders();
-
-    // console.log('the book isbn is', this.Book);
-    // console.log('adter func: ', this.extractNumericISBN(this.Book.isbn));
-
-    this.http.post<Book[]>(url, { headers }).subscribe(
+    const url = `http://localhost:3000/books/`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // Set content type to JSON
+    
+    this.http.post<Book[]>(url, this.Book, { headers }).subscribe(
       (response) => {
-        console.log('Success:', response);
+        console.log('Success: ', response);
       },
       (error) => {
-        console.error('Error: raaaaaaaa', error);
+        console.error('Error: ', error);
       }
     );
+    
   }
   extractNumericISBN(isbn: any) {
     // Remove any non-digit characters from the string
