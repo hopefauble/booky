@@ -7,6 +7,7 @@ import { Completed } from './Completed.mjs';
 const app = express();
 const port = 3000;
 
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -24,7 +25,17 @@ app.get('/books/:id', async (req, res) => {
     }
     res.json(ing.json());
 });
-
+//get all books
+app.get('/books/all', async (req, res) => {
+    try{
+        let books = await Book.getAllbooks();
+        res.json(books);
+    } catch (error) {
+        console.error('Error', error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+//
 app.post('/books/', async (req, res) => {
     let ing = await Book.create(req.body);
 
@@ -60,10 +71,12 @@ app.delete('/books/:id', async (req, res) => {
     }
     res.json(true);
 })
+app.get('/books/:id')
 
 app.get('/completed', async (req, res) => {
     res.json(await Completed.getAllISBNs());
 });
+
 
 app.get('/completed/:id', async (req, res) => {
     let ing = await Completed.findByisbn({ id: req.params.id });
@@ -110,6 +123,8 @@ app.delete('/completed/:isbn', async (req, res) => {
     }
     res.json(true);
 })
+
+
 
 // await Book.create({isbn: "9780345445605", title: "The Hobbit", authors: "J.R.R. Tolkien", description: "A story of a little man going on a big journey."})
 

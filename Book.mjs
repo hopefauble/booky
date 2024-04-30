@@ -38,6 +38,15 @@ export class Book {
         }
     }
 
+    static async getAllbooks(){
+        try{
+            let rows = await db.all('select * from books');
+            return rows;
+        } catch (e){
+            return [];
+        }
+    }
+
     static async getAllISBNs() {
         try {
             let rows = await db.all('select isbn from books');

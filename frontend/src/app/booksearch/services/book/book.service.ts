@@ -28,7 +28,8 @@ export class BookService {
         authors: item.volumeInfo.authors ? item.volumeInfo.authors[0] : 'Author Not Available',
         description: item.volumeInfo.description || 'Description Not Available',
         isbn: item.volumeInfo.industryIdentifiers ?
-          item.volumeInfo.industryIdentifiers[0].identifier : 'ISBN Not Available'
+          item.volumeInfo.industryIdentifiers[0].identifier : 'ISBN Not Available',
+          coverImageUrl: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : undefined
       }));
     } else {
       return [];
@@ -36,6 +37,9 @@ export class BookService {
   }
     getBook(id: string): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.baseUrl}/id/${id}`);
+  }
+    getAllBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.baseUrl}/all`);
   }
 
     deleteBook(id: number, moveToCompleted: boolean): Observable<any>{
