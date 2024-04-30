@@ -13,7 +13,14 @@ app.use(bodyParser.json());
 
 // return an array of book objects
 app.get('/books', async (req, res) => {
-    res.json(await Book.getAllIDs());
+    const ids = await Book.getAllIDs(); // Assuming getAllIDs is a function that returns an array of book IDs
+
+    const books = await Promise.all(ids.map(async (id) => {
+      const book = await Book.findByID(id);
+      return book.json(); // Assuming json() returns the JSON representation of the book
+    }));
+
+    res.json(books);
 });
 
 app.get('/books/:id', async (req, res) => {
@@ -76,7 +83,14 @@ app.delete('/books/:id', async (req, res) => {
 })
 
 app.get('/completed', async (req, res) => {
-    res.json(await Completed.getAllIDs());
+    const ids = await Completed.getAllIDs(); // Assuming getAllIDs is a function that returns an array of book IDs
+
+    const books = await Promise.all(ids.map(async (id) => {
+      const book = await Completed.findByID(id);
+      return book.json(); // Assuming json() returns the JSON representation of the book
+    }));
+
+    res.json(books);
 });
 
 app.get('/completed/:id', async (req, res) => {
