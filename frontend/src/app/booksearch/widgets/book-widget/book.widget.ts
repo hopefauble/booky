@@ -19,6 +19,7 @@ export class BookWidget {
   ) { }
 
   onClick() {
+    console.log('Posting this book', this.Book)
     const url = `http://localhost:3000/books/`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // Set content type to JSON
     

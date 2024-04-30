@@ -6,8 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookService } from './booksearch/services/book/book.service';
 import { BooksearchModule } from './booksearch/booksearch.module';
 import { AppRoutingModule } from './app-routing.module';
-import { CompletedbooksModule } from './completedbooks/completedbooks.module';
 import { BookdetailComponent } from './bookdetail/bookdetail.component';
+import { BooklistComponent } from './booklist/booklist.component';
+import { BooksearchComponent } from './booksearch/booksearch.component';
+import { BooklistModule } from './booklist/booklist.module';
 
 
 @NgModule({
@@ -22,7 +24,7 @@ import { BookdetailComponent } from './bookdetail/bookdetail.component';
     ReactiveFormsModule,
     BooksearchModule,
     AppRoutingModule,
-    CompletedbooksModule,
+    BooklistModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [BookService,],

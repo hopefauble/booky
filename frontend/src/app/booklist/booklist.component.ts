@@ -1,40 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BookService } from '../booksearch/services/book/book.service';
-import { Book }
-import { FormsModule } from '@angular/forms'; 
+import { Book } from '../models/book.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-booklist',
-  standalone: true,
-  imports: [FormsModule],
   templateUrl: './booklist.component.html',
   styleUrls: ['./booklist.component.css']
 })
 export class BooklistComponent implements OnInit {
   books: Book[] = [];
-  userId!: string;
-  newBookIsbn!: number;
-
-  constructor(private bookService: BookService, private route: ActivatedRoute) { }
+  private baseUrl = 'http://localhost:3000/books';
+  
+  
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.loadBooks();
+    this.getBooks();
   }
-  loadBooks(): void{
-    this.bookService.getBooksById().subscribe({
-      next: (data) => this.books = data,
-      error: (err) => console.error('Failed to load books', err)
-    });
-  }
-deleteBook(id: number, moveToCompleted: boolean): void{
-  this.bookService.deleteBook(id, moveToCompleted).subscribe({
-    next: () => this.loadBooks(),
-    error: (err) => console.error('Failed to delete book', err)
-  });
-}
-  
 
+  private getBooks(): void {
+    this.http.get<Book[]>(this.baseUrl).subscribe(
+      (response) => {
+      this.books = response;
+      },
+      (error) => {
+        console.error("error", error);
+      }
+    )};
 }
-
 

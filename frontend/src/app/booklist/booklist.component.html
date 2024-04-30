@@ -1,11 +1,6 @@
 <p>booklist works!</p>
-<h2>My Booklist</h2>
 <ul>
-  <li *ngFor="let book of books">
-    {{ book.title }} by {{ book.authors }}
-    <button (click)="deleteBook(book.id, false)">Delete</button>
-    <button (click)="deleteBook(book.id, true)">Move to Finished Books</button>
-  </li>
+    <li *ngFor="let book of books">
+        {{ book.title}} by {{ book.authors }}
+    </li>
 </ul>
-<input type="number" [(ngModel)]="newBookIsbn" placeholder="Enter ISBN">
-<button (click)="deleteBook(newBookIsbn)">Delete Book</button>

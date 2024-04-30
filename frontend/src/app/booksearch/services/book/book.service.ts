@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, BehaviorSubject } from 'rxjs';
 import { Book } from '../../../models/book.model';
 
 @Injectable({
@@ -8,7 +8,11 @@ import { Book } from '../../../models/book.model';
 })
 export class BookService {
   private baseUrl = 'http://localhost:3000/books'; 
+  private readingList = new BehaviorSubject<Book[]>([]);
+  readingList$ = this.readingList.asObservable();
+
   constructor(private http: HttpClient) { }
+
 
   getVolume(volumeId: string): Observable<Book[]> {
     const encodedString = encodeURIComponent(volumeId);
@@ -34,18 +38,18 @@ export class BookService {
       return [];
     }
   }
-    getBook(id: string): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.baseUrl}/id/${id}`);
-  }
+  //   getBook(id: string): Observable<Book[]> {
+  //   return this.http.get<Book[]>(`${this.baseUrl}/id/${id}`);
+  // }
 
-    deleteBook(id: number, moveToCompleted: boolean): Observable<any>{
-      const queryParams = moveToCompleted ? '?move=true' : '?move=false';
-      return this.http.delete(`${this.baseUrl}/${id}${queryParams}`);
-    }
+  //   deleteBook(id: number, moveToCompleted: boolean): Observable<any>{
+  //     const queryParams = moveToCompleted ? '?move=true' : '?move=false';
+  //     return this.http.delete(`${this.baseUrl}/${id}${queryParams}`);
+  //   }
 
-    addBookToUser(isbn: number, id: string): Observable<Book> {
-    return this.http.post<Book>(`${this.baseUrl}`, { isbn, id});
-  }
-  
+  //   addBookToUser(isbn: number, id: string): Observable<Book> {
+  //   return this.http.post<Book>(`${this.baseUrl}`, { isbn, id});
+  // }
+
 }
 
