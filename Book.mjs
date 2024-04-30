@@ -6,14 +6,15 @@ export class Book {
     #title
     #authors
     #description
-    #notes = ""
+    #notes
 
-    constructor(id, isbn, title, authors, description) {
+    constructor(id, isbn, title, authors, description, notes) {
         this.#id = id;
         this.#isbn = isbn;
         this.#title = title;
         this.#authors = authors;
         this.#description = description;
+        this.#notes = notes;
     }
 
     static async create(data) {
@@ -52,7 +53,7 @@ export class Book {
             if (!row) {
                 return null;
             } else {
-                return new Book(row.id, row.isbn, row.title, row.authors, row.description);
+                return new Book(row.id, row.isbn, row.title, row.authors, row.description, row.notes);
             }
         } catch (e) {
             console.error("Error fetching book by ID:", e);
@@ -71,7 +72,7 @@ export class Book {
 
     async setNotes(id, new_note) {
         try {
-            await db.run('update books set notes = ? where id = ?', new_note, id);
+            await db.run('update books set notes = ? where id = ?', [new_note, id]);
             this.#notes = new_note;
             return true;
         } catch (e) {

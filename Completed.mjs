@@ -9,13 +9,13 @@ export class Completed {
     #description
     #notes
 
-    constructor (id, isbn, title, authors, description) {
+    constructor (id, isbn, title, authors, description, notes) {
         this.#id = id;
         this.#isbn = isbn;
         this.#title = title;
         this.#authors = authors;
         this.#description =  description;
-        this.#notes = ""
+        this.#notes = notes;
     }
 
     static async create(data) {
@@ -63,7 +63,7 @@ export class Completed {
 
     async setNotes(id, new_note) {
         try {
-           await db.run('UPDATE Completed SET notes = ? where id = ?', new_note, id);
+           await db.run('UPDATE Completed SET notes = ? where id = ?', [new_note, id]);
            this.#notes = new_note;
            return true;
         } catch (e) {
