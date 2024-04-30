@@ -18,7 +18,6 @@ export class Book {
     }
 
     static async create(data) {
-
         try {
             let db_result = await db.run('insert into Books values (NULL, ?, ?, ?, ?, ?)', data.isbn, data.title, data.authors, data.description, "");
             let ing = new Book(db_result.lastID, data.isbn, data.title, data.authors, data.description, "");
