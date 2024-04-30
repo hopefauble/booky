@@ -31,7 +31,7 @@ export class Book {
 
     static async getAllIDs() {
         try {
-            let rows = await db.all('select id from Books');
+            let rows = await db.all('select id from books');
             return rows.map(r => r.id);
         } catch (e) {
             return [];
@@ -40,7 +40,7 @@ export class Book {
 
     static async getAllISBNs() {
         try {
-            let rows = await db.all('select isbn from Books');
+            let rows = await db.all('select isbn from books');
             return rows.map(r => r.isbn);
         } catch (e) {
             return [];
@@ -49,7 +49,7 @@ export class Book {
 
     static async findByID(id) {
         try {
-            let row = await db.get('select * from Books where id = ?', id);
+            let row = await db.get('select * from books where id = ?', id);
             if (!row) {
                 return null;
             } else {
@@ -60,6 +60,8 @@ export class Book {
             return null;
         }
     }
+        
+    
 
     static async deleteBookByID(id) {
         try {
