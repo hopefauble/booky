@@ -37,5 +37,4 @@ export class BookWidget {
     const numericISBN = isbn.replace(/\D/g, '');
     return numericISBN;
   }
-
 }

@@ -18,9 +18,6 @@ export class BookService {
     const headers = {
       Authorization: `AIzaSyCz-eWeCBVGmZs8zpylRKIrVZRlsjPSxJE`
     };
-
-
-
     return this.http.get<Book[]>(url, { headers }).pipe(map(this.extractBooks));
   }
 
@@ -37,16 +34,17 @@ export class BookService {
       return [];
     }
   }
-    getBooksByUser(userId: string): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.baseUrl}/user/${userId}`);
+    getBook(id: string): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.baseUrl}/id/${id}`);
   }
 
-    deleteBook(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
-  }
+    deleteBook(id: number, moveToCompleted: boolean): Observable<any>{
+      const queryParams = moveToCompleted ? '?move=true' : '?move=false';
+      return this.http.delete(`${this.baseUrl}/${id}${queryParams}`);
+    }
 
-    addBookToUser(isbn: number, userId: string): Observable<Book> {
-    return this.http.post<Book>(`${this.baseUrl}`, { isbn, userId });
+    addBookToUser(isbn: number, id: string): Observable<Book> {
+    return this.http.post<Book>(`${this.baseUrl}`, { isbn, id});
   }
   
 }

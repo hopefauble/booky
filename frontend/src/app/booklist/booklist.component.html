@@ -3,7 +3,8 @@
 <ul>
   <li *ngFor="let book of books">
     {{ book.title }} by {{ book.authors }}
-    <button (click)="deleteBook(book.id)">Delete</button>
+    <button (click)="deleteBook(book.id, false)">Delete</button>
+    <button (click)="deleteBook(book.id, true)">Move to Finished Books</button>
   </li>
 </ul>
 <input type="number" [(ngModel)]="newBookIsbn" placeholder="Enter ISBN">
