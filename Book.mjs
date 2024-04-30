@@ -20,8 +20,8 @@ export class Book {
     static async create(data) {
         try {
             // Stretch two: check if the book already exists. If so, return "Book exists."
-            let db_result = await db.run('insert into Books values (NULL, ?, ?, ?, ?, ?)', data.isbn, data.title, data.authors, data.description, "");
-            let ing = new Book(db_result.lastID, data.isbn, data.title, data.authors, data.description, "");
+            let db_result = await db.run('insert into Books values (NULL, ?, ?, ?, ?, ?)', data.isbn, data.title, data.authors, data.description, data.notes);
+            let ing = new Book(db_result.lastID, data.isbn, data.title, data.authors, data.description, data.notes);
             return ing;
         } catch (e) {
             return null;

@@ -20,8 +20,8 @@ export class Completed {
 
     static async create(data) {
             try {
-                let db_result = await db.run('insert into Completed values (NULL, ?, ?, ?, ?, ?)', data.isbn, data.title, data.authors, data.description, "");
-                let ing = new Completed(db_result.lastID, data.isbn, data.title, data.authors, data.description, "");
+                let db_result = await db.run('insert into Completed values (NULL, ?, ?, ?, ?, ?)', data.isbn, data.title, data.authors, data.description, data.notes);
+                let ing = new Completed(db_result.lastID, data.isbn, data.title, data.authors, data.description, data.notes);
                 return ing;
             } catch (e) {
                 return null;

@@ -26,6 +26,10 @@ app.get('/books/:id', async (req, res) => {
 });
 
 app.post('/books/', async (req, res) => {
+    if (!req.body.notes) {
+        req.body.notes = "";
+    }
+
     let ing = await Book.create(req.body);
 
     if (!ing) {
@@ -59,6 +63,11 @@ app.put('/books/:id', async (req, res) => {
     res.json(true);
 });
 app.delete('/books/:id', async (req, res) => {
+    if (!await Book.findByID(req.params.id)) {
+        res.status(404).send("Book not found.");
+        return;
+    }
+
     if (!await Book.deleteBookByID(req.params.id)) {
         res.status(400).send("Book not deleted");
         return;
