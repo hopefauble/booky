@@ -1,5 +1,6 @@
 
-export interface Book {
+export interface Completed {
+    id: number
     title: string
     authors: string 
     description: string 

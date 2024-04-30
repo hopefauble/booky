@@ -106,12 +106,21 @@ app.post('/completed/:id', async (req, res) => {
 
     let book = await Book.findByID(req.params.id)
 
+    if (!book) {
+        res.status(404).send("Book not found.");
+        return;
+    }
+
     let ing = await Completed.create({ isbn: book.getISBN(), title: book.getTitle(), authors: book.getAuthors(), description: book.getDescription(), notes: book.getNotes() });
     let deletion = await Book.deleteBookByID(req.params.id);
-    ;
-    if (!ing || !deletion) {
+    
+    if (!ing) {
         res.status(400).send("Bad request");
         return;
+    }
+
+    if (!deletion) {
+        res.status(400).send("Not deleted from booklist")
     }
 
     res.status(201).json(ing.json());

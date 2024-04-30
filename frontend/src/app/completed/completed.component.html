@@ -1,0 +1,11 @@
+  <div *ngFor="let book of completedBooks">
+    <div class="container">
+      <h2>Title: {{ book.title }}</h2>
+      <div class="content">
+          <div class="left-column">
+              <p><b>Author(s):</b> {{ book.authors }}</p>
+              <p><b>ISBN:</b> {{book.isbn}} </p>
+              <p>{{ book.description }}</p>
+          </div>
+      </div>
+  </div>

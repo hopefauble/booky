@@ -49,7 +49,8 @@ export class Book {
 
     static async findByID(id) {
         try {
-            let row = await db.get('select * from books where id = ?', id);
+            
+            let row = await db.get('select * from books where id = ?', [id]);
             if (!row) {
                 return null;
             } else {

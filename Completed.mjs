@@ -95,15 +95,15 @@ export class Completed {
     }
 
     getAuthors() {
-        return this.#authors
+        return this.#authors;
     }
 
     getDescription() {
-        return this.#description
+        return this.#description;
     }
 
     getNotes() {
-        return this.#notes
+        return this.#notes;
     }
 
 }
