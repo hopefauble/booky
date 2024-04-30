@@ -1,42 +1,37 @@
 import {db} from './db.mjs';
+
 export class Completed {
 
     #id
     #isbn
+    #title
+    #authors
+    #description
+    #notes
 
-    constructor (id, isbn) {
+    constructor (id, isbn, title, authors, description) {
         this.#id = id;
         this.#isbn = isbn;
+        this.#title = title;
+        this.#authors = authors;
+        this.#description =  description;
+        this.#notes = ""
     }
 
     static async create(data) {
-        // if ((data !== undefined) && (data instanceof Object) 
-        // ) {
             try {
-                let db_result = await db.run('insert into Books values (NULL, ?)', data.isbn);
-                let ing = new Book(db_result.lastID, data.isbn);
-                console.log("HERE");
+                let db_result = await db.run('insert into Completed values (NULL, ?, ?, ?, ?, ?)', data.isbn, data.title, data.authors, data.description, "");
+                let ing = new Completed(db_result.lastID, data.isbn, data.title, data.authors, data.description, "");
                 return ing;
             } catch (e) {
                 return null;
             }
         }
-        // return null;
-    // }
 
     static async getAllIDs() {
         try {
-            let rows = await db.all('select id from Books');
+            let rows = await db.all('select id from Completed');
             return rows.map(r => r.id);
-        } catch (e) {
-            return [];
-        }
-    }
-
-    static async getAllISBNs() {
-        try {
-            let rows = await db.all('select isbn from Books');
-            return rows.map(r => r.isbn);
         } catch (e) {
             return [];
         }
@@ -44,21 +39,33 @@ export class Completed {
 
     static async findByID(id) {
         try {
-            let row = await db.get('select * from Books where id = ?', id);
+            let row = await db.get('select * from Completed where id = ?', id);
             if (!row) {
                 return null;
             } else {
-                return new Book(row.id, row.isbn);
+                return new Completed(row.id, row.isbn, row.title, row.authors, row.description, row.notes);
             }
         } catch (e) {
+            console.error("Error fetching book by ID:", e);
             return null;
         }
     }
+    
 
     static async deleteBookByID(id) {
         try {
-            await db.run('delete from Books where id = ?', id);
+            await db.run('delete from Completed where id = ?', id);
             return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    async setNotes(id, new_note) {
+        try {
+           await db.run('UPDATE Completed SET notes = ? where id = ?', new_note, id);
+           this.#notes = new_note;
+           return true;
         } catch (e) {
             return false;
         }
@@ -67,7 +74,11 @@ export class Completed {
     json() {
         return {
             id: this.#id,
-            isbn: this.#isbn
+            isbn: this.#isbn,
+            title: this.#title,
+            authors: this.#authors,
+            description: this.#description,
+            notes: this.#notes
         }
     }
 
@@ -75,13 +86,24 @@ export class Completed {
         return this.#id;
     }
 
-    async setisbn(new_isbn) {
-        try {
-            await db.run('update Books set isbn = ? where id = ?', this.#isbn, this.#id);
-            this.#isbn = new_isbn;
-            return true;
-        } catch (e) {
-            return false;
-        }
+    getISBN() {
+        return this.#isbn;
     }
+
+    getTitle() {
+        return this.#title;
+    }
+
+    getAuthors() {
+        return this.#authors
+    }
+
+    getDescription() {
+        return this.#description
+    }
+
+    getNotes() {
+        return this.#notes
+    }
+
 }
