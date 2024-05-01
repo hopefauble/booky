@@ -13,8 +13,18 @@
             </div>
         </div>
         <hr>
-        <div>
-            <label for="notes">Notes:</label><br>
-            <!-- <textarea id="notes" name="notes" [ngModel]="book.notes" (ngModelChange)="book.notes = $event" rows="4" cols="50"></textarea> -->
-        </div>
-    </div>
+        <!-- <div>
+            <p>Notes: {{book.notes}} </p>
+
+            <form [formGroup]="notesForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input class="search-input" formControlName="notes" type="text" placeholder="Enter new notes...!">
+                    <input type="hidden" formControlName="id" [value]="book.id">
+                    <button class="search-button" type="submit">Submit</button>
+                </div>
+            </form>
+        </div> -->
+</div>
+
+<p> Add some more books! </p>
+

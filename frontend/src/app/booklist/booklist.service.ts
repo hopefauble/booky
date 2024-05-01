@@ -19,7 +19,7 @@ export class BooklistService {
   deleteBook(id: number): Observable<any> {
     const url = `http://localhost:3000/books/${id}`;
     console.log("deleting: ", url);
-    return this.http.delete<Completed>(url).pipe(
+    return this.http.delete<Book>(url).pipe(
       catchError((error: any) => {
         console.error('Error deleting book:', error);
         throw error;
@@ -37,5 +37,15 @@ export class BooklistService {
       })
     );
   }
+
+
+
+  updateNotes(notes: string, id: number): Observable<any> {
+    const url = `http://localhost:3000/books/${id}`;
+    const headers = new HttpHeaders();
+
+    return this.http.put<Book>(url, notes, { headers }); 
+  }
+
 
 }

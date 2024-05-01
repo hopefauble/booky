@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BooklistComponent } from './booklist.component';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
+  declarations: [BooklistComponent], 
   imports: [
     CommonModule,
-    BooklistComponent
+    ReactiveFormsModule
   ],
   exports: [BooklistComponent]
 })

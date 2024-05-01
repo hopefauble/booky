@@ -1,4 +1,4 @@
-import { NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -7,13 +7,11 @@ import { BookService } from './booksearch/services/book/book.service';
 import { BooksearchModule } from './booksearch/booksearch.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CompletedModule } from './completed/completed.module';
-import { BooklistComponent } from './booklist/booklist.component';
-
+import { BooklistModule } from './booklist/booklist.module'; // Import BooklistModule here
 
 @NgModule({
   declarations: [
     AppComponent,
-    BooklistComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,8 +21,9 @@ import { BooklistComponent } from './booklist/booklist.component';
     BooksearchModule,
     AppRoutingModule,
     CompletedModule,
+    BooklistModule
   ],
-  providers: [BookService,],
+  providers: [BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
