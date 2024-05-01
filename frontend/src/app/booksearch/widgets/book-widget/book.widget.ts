@@ -11,6 +11,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class BookWidget {
 
   @Input() Book!: Book;
+  
+  
 
   constructor(
     public bookService: BookService,
@@ -19,6 +21,7 @@ export class BookWidget {
   ) { }
 
   onClick() {
+
     const url = `http://localhost:3000/books/`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // Set content type to JSON
     
@@ -30,7 +33,5 @@ export class BookWidget {
         console.error('Error: ', error);
       }
     );
-    
   }
-
 }
