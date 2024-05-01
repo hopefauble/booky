@@ -21,7 +21,7 @@ export class CompletedService {
     return this.http.delete<Completed>(url).pipe(
       catchError((error: any) => {
         console.error('Error deleting book:', error);
-        throw error; // Rethrow the error to be caught by the component
+        throw error;
       })
     );
   }
@@ -32,7 +32,7 @@ export class CompletedService {
     return this.http.delete<Completed>(url).pipe(
       catchError((error: any) => {
         console.error('Error moving book:', error);
-        throw error; // Rethrow the error to be caught by the component
+        throw error;
       })
     );
   }
