@@ -4,10 +4,10 @@ import { BooklistComponent } from './booklist.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [BooklistComponent], 
+  declarations: [BooklistComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [BooklistComponent]
 })

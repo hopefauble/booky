@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../models/book.model';
 import { BooklistService } from './booklist.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+// import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-booklist',
@@ -65,19 +65,19 @@ export class BooklistComponent implements OnInit {
     );
   }
 
-  updateNotes(newNotes: string, id: any) {
-    console.log(newNotes, id);
+  // updateNotes(newNotes: string, id: any) {
+  //   console.log(newNotes, id);
 
-    this.booklistService.updateNotes(newNotes, id).subscribe(
-      () => {
-        console.log("Book deleted successfully.");
-        this.ngOnInit();
-      },
-      (error: any) => {
-        console.error('Error deleting book:', error);
-      }
-    );
-  }
+  //   this.booklistService.updateNotes(newNotes, id).subscribe(
+  //     () => {
+  //       console.log("Book deleted successfully.");
+  //       this.ngOnInit();
+  //     },
+  //     (error: any) => {
+  //       console.error('Error deleting book:', error);
+  //     }
+  //   );
+  // }
 
 
 }
