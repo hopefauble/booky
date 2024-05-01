@@ -7,11 +7,13 @@ import { BookService } from './booksearch/services/book/book.service';
 import { BooksearchModule } from './booksearch/booksearch.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CompletedModule } from './completed/completed.module';
+import { BooklistComponent } from './booklist/booklist.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    BooklistComponent,
   ],
   imports: [
     BrowserModule,

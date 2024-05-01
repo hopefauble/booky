@@ -19,7 +19,6 @@ export class CompletedComponent implements OnInit {
   ngOnInit(): void {
     this.completedService.getCompletedBooks().subscribe(
       books => {
-        console.log(books);
         this.completedBooks = books;
       },
       error => {

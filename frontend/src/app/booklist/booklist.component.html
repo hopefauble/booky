@@ -1,0 +1,20 @@
+<div *ngFor="let book of books">
+    <div class="container">
+        <h2>Title: {{ book.title }}</h2>
+        <div class="content">
+            <div class="left-column">
+                <p><b>Author(s):</b> {{ book.authors }}</p>
+                <p><b>ISBN:</b> {{book.isbn}} </p>
+                <p>{{ book.description }}</p>
+            </div>
+            <div class="right-column">
+                <button class="button" (click)="onMove(book.id)">I've finished reading this!</button>
+                <button class="button" (click)="onDelete(book.id)">Delete Book From List</button>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <label for="notes">Notes:</label><br>
+            <!-- <textarea id="notes" name="notes" [ngModel]="book.notes" (ngModelChange)="book.notes = $event" rows="4" cols="50"></textarea> -->
+        </div>
+    </div>
