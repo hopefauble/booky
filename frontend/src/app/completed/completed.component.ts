@@ -27,4 +27,31 @@ export class CompletedComponent implements OnInit {
       }
     );
   }
+
+  onMove(id: number) {
+    console.log("moving ", id);
+    this.completedService.moveBook(id).subscribe(
+      () => {
+        console.log("Book moved successfully.");
+        this.ngOnInit(); 
+      },
+      error => {
+        console.error('Error deleting book:', error);
+      }
+    );
+  }
+
+  onDelete(id: number) {
+    console.log("deleting ", id);
+    this.completedService.deleteBook(id).subscribe(
+      () => {
+        console.log("Book deleted successfully.");
+        this.ngOnInit(); 
+      },
+      error => {
+        console.error('Error deleting book:', error);
+      }
+    );
+  }
+  
 }
