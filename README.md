@@ -1,16 +1,19 @@
 # Welcome to Booky!
 
 ## Presentation video: 
+
 https://youtu.be/J8MEBdUTiHs
 
 
 ## Once you've cloned this repo, take these steps to set up the program:
 
+Usage of Booky requires a key from the [Google Book API](https://developers.google.com/books/docs/v1/using). Once you have gotten a key, navigate to the [book.service.ts](frontend\src\app\booksearch\services\book\book.service.ts) file in the fronend directory and paste it as the value for `APIkey`.
+
 ### Front-end Setup
 
 1. Open a new terminal, change the working directory to `frontend` and run `npm install`.
 2. Run `ng serve` to begin the front-end development server.
-3. The front-end server will run on localhost:4200.
+3. The front-end server will run on `localhost:4200`.
 
 ### Back-end Setup
 
@@ -20,7 +23,7 @@ https://youtu.be/J8MEBdUTiHs
 
 
 ### Usage
-After these steps have all been taken, you should be able to freely interact with the program on localhost:4200 in your web browser.
+After these steps have all been taken, you should be able to freely interact with the program on `localhost:4200` in your web browser.
 
 ## Book Search Page
 1. Navigate to the book search page where you can search for books by title or author.

@@ -13,10 +13,10 @@ export class BookService {
   getVolume(volumeId: string): Observable<Book[]> {
     const encodedString = encodeURIComponent(volumeId);
     const title = encodedString.replace(/%20/g, '%20');
-    console.log(title);
-    const url = `https://www.googleapis.com/books/v1/volumes?q=title:${title}&key=AIzaSyCz-eWeCBVGmZs8zpylRKIrVZRlsjPSxJE`;
+    const APIkey = 'ENTER YOUR KEY HERE'
+    const url = `https://www.googleapis.com/books/v1/volumes?q=title:${title}&key=${APIkey}`;
     const headers = {
-      Authorization: `AIzaSyCz-eWeCBVGmZs8zpylRKIrVZRlsjPSxJE`
+      Authorization: `${APIkey}`
     };
 
 
